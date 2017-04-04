@@ -165,8 +165,6 @@ function isPalindrome(inputString) {
 
 function wrapCharacter(inputString) {
     var letters = inputString.split("");
-    //var tempString = "";
-    //var tempArray  = [];
     
     for (var charCount = 0; charCount < letters.length; charCount++) {
         if (charCount % 40 === 0 && charCount != 0) {
@@ -179,21 +177,6 @@ function wrapCharacter(inputString) {
     }
     
     return letters.join("");
-    
-    
-    /*
-    for (var i = 0; i < letters.length; i++) {
-        tempString += letters[i];
-        
-        if (tempString.length == 40) {
-            tempString += "\n";
-            tempArray.push(tempString);
-            tempString = "";
-        }
-    }
-    
-    return tempArray.join("");
-    */
 }
 
 function wrapWord(inputString) {
@@ -241,19 +224,20 @@ function bubbleSort(arrayOfNumbers) {
     
     do {
         swapped = false; // make sure this starts as false at the start of the function so we dont get an endless loop
-        
-        for (var i = 0; i < arrayOfNumbers.length; i++) {
-            if (arrayOfNumbers[i] > arrayOfNumbers[i+1]) {
-                tempIndex = arrayOfNumbers[i]; // put index i into temp place;
-                arrayOfNumbers[i] = arrayOfNumbers[i+1]; // replace index i with index i+1, the one after it
-                arrayOfNumbers[i+1] = tempIndex; // replace index i+1 with the temp value, which is equal to the now-deleted index i    
-                
-                swapped = true; // set to true only if we have swapped elements, only set this to true within the loop
+        if (arrayOfNumbers) {
+            for (var i = 0; i < arrayOfNumbers.length; i++) {
+                if (arrayOfNumbers[i] > arrayOfNumbers[i+1]) {
+                    tempIndex = arrayOfNumbers[i]; // put index i into temp place;
+                    arrayOfNumbers[i] = arrayOfNumbers[i+1]; // replace index i with index i+1, the one after it
+                    arrayOfNumbers[i+1] = tempIndex; // replace index i+1 with the temp value, which is equal to the now-deleted index i    
+                    
+                    swapped = true; // set to true only if we have swapped elements, only set this to true within the loop
+                }
             }
         }
     } while(swapped);
-        
-    bubbleSort(arrayOfNumbers); // run the function again with the newly sorted array until it ends
+    
+    return arrayOfNumbers;
 }
 
 /***** DO NOT EDIT AFTER THIS LINE *****/
