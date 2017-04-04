@@ -165,8 +165,8 @@ function isPalindrome(inputString) {
 
 function wrapCharacter(inputString) {
     var letters = inputString.split("");
-    
-    var charCount = 0;
+    //var tempString = "";
+    //var tempArray  = [];
     
     for (var charCount = 0; charCount < letters.length; charCount++) {
         if (charCount % 40 === 0 && charCount != 0) {
@@ -178,40 +178,61 @@ function wrapCharacter(inputString) {
         }
     }
     
-    var finalOutput = letters.join("");
+    return letters.join("");
     
-    return finalOutput;
+    
+    /*
+    for (var i = 0; i < letters.length; i++) {
+        tempString += letters[i];
+        
+        if (tempString.length == 40) {
+            tempString += "\n";
+            tempArray.push(tempString);
+            tempString = "";
+        }
+    }
+    
+    return tempArray.join("");
+    */
 }
 
 function wrapWord(inputString) {
-    var words = inputString.split(" ");
-    var totalChars = 0;
-    var tempString = "";
+    var words = inputString.split(" "); // split the string into individual words
+    var totalChars = 0; // counter for characters to make sure words dont go over 40
     
+    var tempString = ""; // temporary string to store all values for a line to format later
+    var tempArray  = []; // array where each index is a line of the total string, join with \n
+    var l;
     for (var i = 0, l = words.length; i < l; i++) {
         if (words[i].length >= 40) {
-            tempString += "\n" + words[i] + "\n";
+            if (tempString) {
+                tempArray.push(tempString);
+                tempString = "";
+                totalChars = 0;
+            }
+            tempArray.push(words[i]); // if the word is too big, push it into the array to be its own line
         }
         else {
-            totalChars += (words[i]+ " ").length;
-            
-            if (totalChars >= 40) {
-                tempString += words[i]+"\n";
+            totalChars += (words[i]+ " ").length; // add up the total characters to get to 40
+            tempString += (words[i] + " "); // add each word to the current line
+            // ^ will need to change this so that the line stays under 40 characters instead of going over            
+
+            if (totalChars >= 40) { // when we get to 40 characters, we need to go to a new line
+                tempArray.push(tempString);
+                tempString = ""; //reset the string so we can store a new line
                 
-                totalChars = words[i].length;
+                totalChars = words[i].length; // set the total characters to the last word which should start on the new line
             }
-            else {
-                if (i != l-1) { // if not the last word, put a space after it
-                    tempString += (words[i]) + " ";
-                    // need to fix this for dealing with words greater than 40 characters
-                }
-                else { // its the last word so dont put a space after it
-                    tempString += words[i];
-                }
+            else if (i === l-1) {
+                tempArray.push(tempString); // otherwise just push the last sentence onto the array to be the last line
             }
         }
     }
-    return tempString;
+    
+    for (var i = 0, l = tempArray.length; i < l; i++) {
+        tempArray[i] = tempArray[i].trim(); // trim the spaces from the beginning and end of each line
+    }
+    return tempArray.join("\n"); // join the array with the new line command so each index will be on a new line
 }
 
 function bubbleSort(arrayOfNumbers) {
