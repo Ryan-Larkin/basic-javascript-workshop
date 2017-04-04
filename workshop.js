@@ -150,6 +150,16 @@ function uniqueElements(array1, array2) {
 }
 
 function isPalindrome(inputString) {
+    inputString = inputString.replace(/\W/g, '').toLowerCase();
+    
+    var reversedString = reverseString(inputString);
+    var palindrome = false;
+    
+    if (inputString === reversedString) {
+        palindrome = true;
+    }
+    
+    return palindrome;
 
 }
 
