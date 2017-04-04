@@ -170,7 +170,7 @@ function wrapCharacter(inputString) {
     
     for (var charCount = 0; charCount < letters.length; charCount++) {
         if (charCount % 40 === 0 && charCount != 0) {
-            letters[charCount] = letters[charCount]+"\n";
+            letters[charCount] = letters[charCount].trim()+"\n";
             
             if (letters[charCount+1] === " ") {
                 letters.splice(charCount+1, 1, "");
