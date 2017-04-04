@@ -185,7 +185,13 @@ function wrapCharacter(inputString) {
 }
 
 function wrapWord(inputString) {
-
+    var words = inputString.split(" ");
+    
+    var charCount = 0;
+    
+    for (var charCount = 0; charCount < inputString.split(""); charCount++) {
+        
+    }
 }
 
 function bubbleSort(arrayOfNumbers) {
