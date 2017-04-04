@@ -164,7 +164,24 @@ function isPalindrome(inputString) {
 }
 
 function wrapCharacter(inputString) {
-
+    var letters = inputString.split("");
+    
+    var charCount = 0;
+    
+    for (var charCount = 0; charCount < letters.length; charCount++) {
+        if (charCount % 40 === 0 && charCount != 0) {
+            //letters.splice(charCount, 0, "\n");
+            letters[charCount] = letters[charCount]+"\n";
+            
+            if (letters[charCount+1] === " ") {
+                letters.splice(charCount+1, 1, "");
+            }
+        }
+    }
+    
+    var finalOutput = letters.join("");
+    
+    return finalOutput;
 }
 
 function wrapWord(inputString) {
