@@ -185,17 +185,28 @@ function wrapCharacter(inputString) {
 }
 
 function wrapWord(inputString) {
-    var words = inputString.split(" ");
     
-    var charCount = 0;
-    
-    for (var charCount = 0; charCount < inputString.split(""); charCount++) {
-        
-    }
 }
 
 function bubbleSort(arrayOfNumbers) {
-
+    var tempIndex = 0;
+    var swapped;
+    
+    do {
+        swapped = false; // make sure this starts as false at the start of the function so we dont get an endless loop
+        
+        for (var i = 0; i < arrayOfNumbers.length; i++) {
+            if (arrayOfNumbers[i] > arrayOfNumbers[i+1]) {
+                tempIndex = arrayOfNumbers[i];
+                arrayOfNumbers[i] = arrayOfNumbers[i+1];
+                arrayOfNumbers[i+1] = tempIndex;
+                
+                swapped = true; // set to true only if we have swapped elements, only set this to true within the loop
+            }
+        }
+    } while(swapped);
+        
+    bubbleSort(arrayOfNumbers); // run the function again with the newly sorted array until it ends
 }
 
 /***** DO NOT EDIT AFTER THIS LINE *****/
