@@ -170,7 +170,6 @@ function wrapCharacter(inputString) {
     
     for (var charCount = 0; charCount < letters.length; charCount++) {
         if (charCount % 40 === 0 && charCount != 0) {
-            //letters.splice(charCount, 0, "\n");
             letters[charCount] = letters[charCount]+"\n";
             
             if (letters[charCount+1] === " ") {
@@ -185,7 +184,34 @@ function wrapCharacter(inputString) {
 }
 
 function wrapWord(inputString) {
+    var words = inputString.split(" ");
+    var totalChars = 0;
+    var tempString = "";
     
+    for (var i = 0, l = words.length; i < l; i++) {
+        if (words[i].length >= 40) {
+            tempString += "\n" + words[i] + "\n";
+        }
+        else {
+            totalChars += (words[i]+ " ").length;
+            
+            if (totalChars >= 40) {
+                tempString += words[i]+"\n";
+                
+                totalChars = words[i].length;
+            }
+            else {
+                if (i != l-1) { // if not the last word, put a space after it
+                    tempString += (words[i]) + " ";
+                    // need to fix this for dealing with words greater than 40 characters
+                }
+                else { // its the last word so dont put a space after it
+                    tempString += words[i];
+                }
+            }
+        }
+    }
+    return tempString;
 }
 
 function bubbleSort(arrayOfNumbers) {
@@ -197,9 +223,9 @@ function bubbleSort(arrayOfNumbers) {
         
         for (var i = 0; i < arrayOfNumbers.length; i++) {
             if (arrayOfNumbers[i] > arrayOfNumbers[i+1]) {
-                tempIndex = arrayOfNumbers[i];
-                arrayOfNumbers[i] = arrayOfNumbers[i+1];
-                arrayOfNumbers[i+1] = tempIndex;
+                tempIndex = arrayOfNumbers[i]; // put index i into temp place;
+                arrayOfNumbers[i] = arrayOfNumbers[i+1]; // replace index i with index i+1, the one after it
+                arrayOfNumbers[i+1] = tempIndex; // replace index i+1 with the temp value, which is equal to the now-deleted index i    
                 
                 swapped = true; // set to true only if we have swapped elements, only set this to true within the loop
             }
